@@ -1,6 +1,6 @@
 // web-launch/app.js
 
-const API_BASE = "https://edgeone-worker-dpsucvz7xuig.edgeone.dev"; // Change to production EdgeOne URL when deployed
+const API_BASE = "https://edgeone-worker.edgeone.dev"; // Change to production EdgeOne URL when deployed
 
 // UI Elements
 const btnCitizen = document.getElementById("btn-citizen");
