@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tri-State Content Negotiator | Tencent EdgeOne Makers</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="The Great Wall for your API - Content Negotiator">
+    <meta property="og:description" content="Every request gets judged. Are you a Citizen, a Merchant, or a Bandit? Try the Edge-DRM live demo.">
+    <meta property="og:type" content="website">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="mascot-container">
+                <!-- Inline Cat Mascot placeholder for Hero -->
+                <svg class="mascot-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(10, 10) scale(0.9)">
+                        <path d="M50,150 C50,200 150,200 150,150 C150,100 180,50 150,50 C120,50 110,80 100,80 C90,80 80,50 50,50 C20,50 50,100 50,150 Z" fill="#fff" />
+                        <g transform="translate(0, -10)" fill="#171717">
+                            <ellipse cx="78" cy="70" rx="3" ry="10" transform="rotate(-15 78 70)" />
+                            <rect x="90" y="60" width="4" height="20" rx="2" />
+                            <rect x="106" y="60" width="4" height="20" rx="2" />
+                            <ellipse cx="122" cy="70" rx="3" ry="10" transform="rotate(15 122 70)" />
+                        </g>
+                        <circle cx="80" cy="110" r="10" fill="#171717" />
+                        <circle cx="120" cy="110" r="10" fill="#171717" />
+                        <path d="M95,130 L105,130 L100,135 Z" fill="#171717" />
+                    </g>
+                </svg>
+            </div>
+            <h1>The Great Wall for your API.</h1>
+            <p class="subtitle">Every request gets judged. Are you a Citizen, a Merchant, or a Bandit?</p>
+        </div>
+    </header>
+
+    <!-- Live Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-label">Citizens let in</span>
+            <span class="stat-value citizen" id="stat-state1">--</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Merchants served</span>
+            <span class="stat-value merchant" id="stat-state2">--</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">Bandits fooled</span>
+            <span class="stat-value bandit" id="stat-state3">--</span>
+        </div>
+    </div>
+
+    <!-- Main App Zone -->
+    <main class="trigger-zone">
+        <div class="container">
+            <!-- Trigger Buttons -->
+            <div class="trigger-grid">
+                <button class="trigger-card citizen" id="btn-citizen">
+                    <img src="images/character/citizens.svg" alt="Citizen" class="card-icon" />
+                    <span class="card-title">"I'm legit"</span>
+                    <span class="card-desc">Valid HMAC Signature</span>
+                </button>
+                <button class="trigger-card merchant" id="btn-merchant">
+                    <img src="images/character/trader.svg" alt="Merchant" class="card-icon" />
+                    <span class="card-title">"I'm a search bot"</span>
+                    <span class="card-desc">Verified Crawler UA</span>
+                </button>
+                <button class="trigger-card bandit" id="btn-bandit">
+                    <img src="images/character/bandit.svg" alt="Bandit" class="card-icon" />
+                    <span class="card-title">"I'm a scraper"</span>
+                    <span class="card-desc">No Credentials</span>
+                </button>
+            </div>
+
+            <!-- Result Viewer -->
+            <div class="result-area">
+                
+                <div class="badge-wrapper" id="meme-badge">
+                    <div class="badge-verdict" id="verdict-text">Verdict: BANDIT 🏴</div>
+                    <a href="#" class="share-btn" id="share-x" target="_blank" rel="noopener noreferrer">Share on X</a>
+                </div>
+
+                <div class="result-container" id="result-container">
+                    <div class="loading" id="loading-indicator" style="display: none;">Judging...</div>
+                    <div class="result-svg-wrapper" id="svg-output">
+                        <!-- Fetched SVG injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- How It Works Section -->
+    <section class="info-section">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>1. Citizen (Valid HMAC)</h3>
+                    <p>Verified requests get the full-resolution Clean SVG without hitting origin servers.</p>
+                </div>
+                <div class="info-item">
+                    <h3>2. Merchant (Crawler)</h3>
+                    <p>Recognized search bots get Semantic SVG + JSON-LD injected for Generative Engine Optimization.</p>
+                </div>
+                <div class="info-item">
+                    <h3>3. Bandit (Default)</h3>
+                    <p>Unverified AI scrapers get degraded visuals heavily stamped with copyright notices (200 OK).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Built on <a href="https://edgeone.ai" target="_blank">Tencent EdgeOne Makers</a></p>
+        <p class="hashtags">#TencentEdgeOne #EdgeOneMakers #CODEPOLITAN #EdgeOne</p>
+        <p style="margin-top: 1rem;"><a href="https://github.com" target="_blank" id="github-link">View Source on GitHub</a></p>
+    </footer>
+
+    <!-- App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
