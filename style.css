@@ -196,6 +196,10 @@ h1 {
   overflow-x: auto;
 }
 
+.result-svg-wrapper {
+  width: 100%;
+}
+
 .result-svg-wrapper svg {
   width: 100%;
   height: auto;
