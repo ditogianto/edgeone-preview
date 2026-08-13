@@ -26,9 +26,17 @@ This repository contains a static HTML/JS web application designed with a Neo-Br
     *   Since this is a static site (HTML/CSS/JS), no build step is required (Framework: `None`).
     *   Set the output directory to the root directory `/`.
 
-## Development Notes
+## EdgeOne's "God-Tier" Caching & The Live Demo Workaround
 
-*   **Cache Busting:** For demonstration purposes, the fetch requests in `app.js` automatically append a timestamp (`?t=...`). This intentionally bypasses EdgeOne's aggressive Edge caching so that the live analytics increment on every single click during a presentation. In a real production scenario, you would remove this to take advantage of EdgeOne's global CDN caching.
+One of Tencent EdgeOne's most powerful features is its aggressive, globally distributed CDN caching. By default, the `edgeone-worker` backend responds to Citizen (State 1) and Merchant (State 2) requests with `Cache-Control: public, max-age=86400`.
+
+**The Problem for Live Demos:**
+Because of this god-tier caching, after you click "Citizen" or "Merchant" for the first time, your browser and EdgeOne's edge nodes lock that SVG into memory. Subsequent clicks *never* reach the backend Serverless function. They are served instantly from the cache. Because the request never reaches the backend, the KV Analytics counter does *not* increment!
+
+**The Solution (Cache Busting):**
+To ensure the live stats increment on *every single click* during a presentation or demo, the `app.js` file intentionally intercepts every `fetch()` request and appends a unique timestamp parameter (e.g., `?t=1734509...`). This technique, known as **Cache Busting**, forces the browser and EdgeOne to treat every click as a brand-new, unique request, bypassing the cache entirely.
+
+*(Note: In a real production deployment, you would remove this `?t=` parameter to save costs and fully utilize EdgeOne's blazingly fast CDN cache).*
 
 ## License
 
