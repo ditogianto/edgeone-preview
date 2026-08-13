@@ -260,6 +260,43 @@ h1 {
   color: #fff;
 }
 
+/* Server Response Proof */
+.server-proof {
+  margin-top: 1.5rem;
+  background-color: var(--border-dark);
+  color: #a0aec0;
+  border: 4px solid var(--border-dark);
+  box-shadow: 8px 8px 0px var(--color-citizen);
+  font-family: var(--font-mono);
+  text-align: left;
+  animation: popOut 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.proof-header {
+  background-color: #2d3748;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+}
+
+.proof-body {
+  padding: 1rem;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.5;
+}
+.proof-body strong {
+  color: #ecc94b;
+}
+.proof-body a {
+  color: #63b3ed;
+  text-decoration: underline;
+}
+
 /* How It Works & Footer */
 .info-section {
   padding: 4rem 2rem;
