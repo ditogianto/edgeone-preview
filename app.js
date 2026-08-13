@@ -1,6 +1,6 @@
 // web-launch/app.js
 
-const API_BASE = "http://localhost:8787"; // Change to production EdgeOne URL when deployed
+const API_BASE = "https://edgeone-worker-dpsucvz7xuig.edgeone.dev"; // Change to production EdgeOne URL when deployed
 
 // UI Elements
 const btnCitizen = document.getElementById("btn-citizen");
@@ -45,11 +45,11 @@ function showLoading() {
 function showResult(svgContent, verdictStr, colorHex) {
     loadingIndicator.style.display = "none";
     svgOutput.innerHTML = svgContent;
-    
+
     // Trigger Meme Badge
     verdictText.innerText = `Verdict: ${verdictStr}`;
     verdictText.style.boxShadow = `4px 4px 0px ${colorHex}`;
-    
+
     // Setup Share on X URL
     const shareText = encodeURIComponent(`I was judged by the AI Content Negotiator! Result: ${verdictStr}. Try the Tri-State routing demo built on Tencent EdgeOne Makers:`);
     const shareUrl = encodeURIComponent(window.location.href);
@@ -73,13 +73,13 @@ btnCitizen.addEventListener("click", async () => {
         // First get a valid demo signature from the backend (demo helper)
         const authRes = await fetch(`${API_BASE}/api/og/demo-auth`);
         if (!authRes.ok) throw new Error("Demo Auth failed");
-        
+
         const authData = await authRes.json();
-        
+
         // Fetch the actual SVG with valid signature
         const svgRes = await fetch(`${API_BASE}/api/og?title=${encodeURIComponent(authData.title)}&signature=${encodeURIComponent(authData.signature)}`);
         const svgText = await svgRes.text();
-        
+
         showResult(svgText, "CITIZEN 🟢", "var(--color-citizen)");
     } catch (e) {
         console.error(e);
@@ -96,7 +96,7 @@ btnMerchant.addEventListener("click", async () => {
         // Fetch the simulated crawler endpoint
         const svgRes = await fetch(`${API_BASE}/api/og/demo?simulate=crawler&title=${encodeURIComponent("Demo Merchant")}`);
         const svgText = await svgRes.text();
-        
+
         showResult(svgText, "MERCHANT 🟡", "var(--color-merchant)");
     } catch (e) {
         console.error(e);
@@ -113,7 +113,7 @@ btnBandit.addEventListener("click", async () => {
         // Fetch the default endpoint without valid credentials
         const svgRes = await fetch(`${API_BASE}/api/og?title=${encodeURIComponent("Stolen Asset")}`);
         const svgText = await svgRes.text();
-        
+
         showResult(svgText, "BANDIT 🏴", "var(--color-bandit)");
     } catch (e) {
         console.error(e);
