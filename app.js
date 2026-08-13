@@ -20,7 +20,7 @@ const shareX = document.getElementById("share-x");
 // Fetch Live Stats
 async function updateStats() {
     try {
-        const res = await fetch(`${API_BASE}/api/og/stats`);
+        const res = await fetch(`${API_BASE}/api/og/stats?t=${Date.now()}`);
         if (res.ok) {
             const data = await res.json();
             statState1.innerText = data.state1 || "0";
@@ -71,13 +71,13 @@ btnCitizen.addEventListener("click", async () => {
     showLoading();
     try {
         // First get a valid demo signature from the backend (demo helper)
-        const authRes = await fetch(`${API_BASE}/api/og/demo-auth`);
+        const authRes = await fetch(`${API_BASE}/api/og/demo-auth?t=${Date.now()}`);
         if (!authRes.ok) throw new Error("Demo Auth failed");
 
         const authData = await authRes.json();
 
         // Fetch the actual SVG with valid signature
-        const svgRes = await fetch(`${API_BASE}/api/og?title=${encodeURIComponent(authData.title)}&signature=${encodeURIComponent(authData.signature)}`);
+        const svgRes = await fetch(`${API_BASE}/api/og?title=${encodeURIComponent(authData.title)}&signature=${encodeURIComponent(authData.signature)}&t=${Date.now()}`);
         const svgText = await svgRes.text();
 
         showResult(svgText, "CITIZEN 🟢", "var(--color-citizen)");
@@ -94,7 +94,7 @@ btnMerchant.addEventListener("click", async () => {
     showLoading();
     try {
         // Fetch the simulated crawler endpoint
-        const svgRes = await fetch(`${API_BASE}/api/og/demo?simulate=crawler&title=${encodeURIComponent("Demo Merchant")}`);
+        const svgRes = await fetch(`${API_BASE}/api/og/demo?simulate=crawler&title=${encodeURIComponent("Demo Merchant")}&t=${Date.now()}`);
         const svgText = await svgRes.text();
 
         showResult(svgText, "MERCHANT 🟡", "var(--color-merchant)");
@@ -111,7 +111,7 @@ btnBandit.addEventListener("click", async () => {
     showLoading();
     try {
         // Fetch the default endpoint without valid credentials
-        const svgRes = await fetch(`${API_BASE}/api/og?title=${encodeURIComponent("Stolen Asset")}`);
+        const svgRes = await fetch(`${API_BASE}/api/og?title=${encodeURIComponent("Stolen Asset")}&t=${Date.now()}`);
         const svgText = await svgRes.text();
 
         showResult(svgText, "BANDIT 🏴", "var(--color-bandit)");
