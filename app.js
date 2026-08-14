@@ -18,6 +18,7 @@ const statState3 = document.getElementById("stat-state3");
 const memeBadge = document.getElementById("meme-badge");
 const verdictText = document.getElementById("verdict-text");
 const shareX = document.getElementById("share-x");
+const shareWa = document.getElementById("share-wa");
 
 // Fetch Live Stats
 async function updateStats() {
@@ -67,6 +68,10 @@ function showResult(svgContent, verdictStr, colorHex, response, requestUrl) {
     const shareText = encodeURIComponent(`I was judged by the AI Content Negotiator! Result: ${verdictStr}. Try the Tri-State routing demo built on Tencent EdgeOne Makers:`);
     const shareUrl = encodeURIComponent("https://github.com/ditogianto/edgeone-preview");
     shareX.href = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}&hashtags=TencentEdgeOne,EdgeOneMakers,CODEPOLITAN,EdgeOne`;
+
+    // Setup Share on WA URL
+    const waText = encodeURIComponent(`I was judged by the AI Content Negotiator! Result: ${verdictStr}. Try the Tri-State routing demo built on Tencent EdgeOne Makers:\nhttps://edgeone-preview.edgeone.dev/`);
+    shareWa.href = `https://wa.me/?text=${waText}`;
 
     // Re-trigger animation
     memeBadge.classList.remove("show");
