@@ -1,6 +1,6 @@
 // web-launch/app.js
 
-const API_BASE = "https://www.ditogianto.web.id"; // Using Custom Domain for Premium Anycast Routing
+const API_BASE = "https://edgeone-worker.edgeone.dev"; // Reverted to default worker domain for Pages CNAME compatibility
 
 // UI Elements
 const btnCitizen = document.getElementById("btn-citizen");
