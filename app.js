@@ -66,11 +66,11 @@ function showResult(svgContent, verdictStr, colorHex, response, requestUrl) {
 
     // Setup Share on X URL
     const shareText = encodeURIComponent(`I was judged by the AI Content Negotiator! Result: ${verdictStr}. Try the Tri-State routing demo built on Tencent EdgeOne Makers:`);
-    const shareUrl = encodeURIComponent("https://www.ditogianto.web.id/?v=2");
+    const shareUrl = encodeURIComponent("https://www.ditogianto.web.id/?v=3");
     shareX.href = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}&hashtags=TencentEdgeOne,EdgeOneMakers,CODEPOLITAN,EdgeOne`;
 
     // Setup Share on WA URL
-    const waText = encodeURIComponent(`I was judged by the AI Content Negotiator! Result: ${verdictStr}. Try the Tri-State routing demo built on Tencent EdgeOne Makers:\nhttps://www.ditogianto.web.id/?v=2`);
+    const waText = encodeURIComponent(`I was judged by the AI Content Negotiator! Result: ${verdictStr}. Try the Tri-State routing demo built on Tencent EdgeOne Makers:\nhttps://www.ditogianto.web.id/?v=3`);
     shareWa.href = `https://wa.me/?text=${waText}`;
 
     // Re-trigger animation
