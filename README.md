@@ -10,8 +10,9 @@ This repository contains a static HTML/JS web application designed with a Neo-Br
     *   **Citizen Button:** Simulates a legitimate user flow by fetching a signed HMAC-SHA256 token from the EdgeOne backend, then requesting the protected asset.
     *   **Merchant Button:** Simulates a verified search engine crawler or AI answer engine (GEO Mode).
     *   **Bandit Button:** Simulates an unauthenticated AI scraper attempting to steal content.
-2.  **Live Server Proof Log:**
-    *   To prove that the logic is happening at the Edge (and not just via a JavaScript trick), the UI dynamically intercepts the HTTP headers returned by the EdgeOne network (`X-Content-Negotiator-State` and `Cache-Control`) and displays them in a terminal-style log window.
+2.  **Live Server Proof Log (The 1ms Proof):**
+    *   To prove that the logic is happening at the Edge (and not just via a JavaScript trick), the UI dynamically intercepts the HTTP headers returned by the EdgeOne network (`X-Content-Negotiator-State`, `Cache-Control`, and `X-Edge-Execution-Time`).
+    *   These headers are printed directly into a terminal-style log window. Because the backend uses non-blocking analytics, you can visually witness the Edge Function hitting a **1ms Execution Time**.
 3.  **Real-time Analytics Dashboard:**
     *   Fetches and displays live KV Storage statistics from the backend, showing exactly how many requests were routed to each state.
 
