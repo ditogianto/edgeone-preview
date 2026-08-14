@@ -53,11 +53,14 @@ function showResult(svgContent, verdictStr, colorHex, response, requestUrl) {
     // Show Server Proof
     const stateHeader = response.headers.get("X-Content-Negotiator-State") || "N/A";
     const cacheHeader = response.headers.get("Cache-Control") || "N/A";
+    const execHeader = response.headers.get("X-Edge-Execution-Time");
     
+    let headersLog = `X-Content-Negotiator-State: <strong>${stateHeader}</strong>\n` +
+                     `Cache-Control: ${cacheHeader}`;
+    if (execHeader) headersLog += `\nX-Edge-Execution-Time: <strong style="color:var(--color-citizen)">${execHeader}</strong>`;
+
     proofBody.innerHTML = `<strong>GET</strong> <a href="${requestUrl}" target="_blank">${requestUrl}</a>\n\n` +
-                          `<strong>HTTP/1.1 ${response.status} OK</strong>\n` +
-                          `X-Content-Negotiator-State: <strong>${stateHeader}</strong>\n` +
-                          `Cache-Control: ${cacheHeader}`;
+                          `<strong>HTTP/1.1 ${response.status} OK</strong>\n` + headersLog;
     serverProof.style.display = "block";
 
     // Trigger Meme Badge
