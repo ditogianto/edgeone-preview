@@ -46,20 +46,29 @@ function showLoading() {
     loadingIndicator.style.display = "block";
 }
 
+function escapeHTML(str) {
+    return String(str).replace(/[&<>'"]/g, tag => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+    }[tag] || tag));
+}
+
 function showResult(svgContent, verdictStr, colorHex, response, requestUrl) {
     loadingIndicator.style.display = "none";
-    svgOutput.innerHTML = svgContent;
+    // Basic SVG sanitization: remove script tags to prevent stored XSS if backend is compromised
+    const sanitizedSVG = svgContent.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+    svgOutput.innerHTML = sanitizedSVG;
 
-    // Show Server Proof
-    const stateHeader = response.headers.get("X-Content-Negotiator-State") || "N/A";
-    const cacheHeader = response.headers.get("Cache-Control") || "N/A";
+    // Show Server Proof with strict escaping
+    const stateHeader = escapeHTML(response.headers.get("X-Content-Negotiator-State") || "N/A");
+    const cacheHeader = escapeHTML(response.headers.get("Cache-Control") || "N/A");
     const execHeader = response.headers.get("X-Edge-Execution-Time");
+    const safeUrl = escapeHTML(requestUrl);
     
     let headersLog = `X-Content-Negotiator-State: <strong>${stateHeader}</strong>\n` +
                      `Cache-Control: ${cacheHeader}`;
-    if (execHeader) headersLog += `\nX-Edge-Execution-Time: <strong style="color:var(--color-citizen)">${execHeader}</strong>`;
+    if (execHeader) headersLog += `\nX-Edge-Execution-Time: <strong style="color:var(--color-citizen)">${escapeHTML(execHeader)}</strong>`;
 
-    proofBody.innerHTML = `<strong>GET</strong> <a href="${requestUrl}" target="_blank">${requestUrl}</a>\n\n` +
+    proofBody.innerHTML = `<strong>GET</strong> <a href="${safeUrl}" target="_blank">${safeUrl}</a>\n\n` +
                           `<strong>HTTP/1.1 ${response.status} OK</strong>\n` + headersLog;
     serverProof.style.display = "block";
 
